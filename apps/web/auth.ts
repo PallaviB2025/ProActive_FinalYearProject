@@ -28,6 +28,19 @@ export const config: NextAuthConfig = {
     strategy: "jwt",
   },
 
+  // Explicit session token cookie configuration
+  cookies: {
+    sessionToken: {
+      name: `next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+  },
+
   // Auth Lifecycle Callbacks
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
