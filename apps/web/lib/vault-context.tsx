@@ -211,7 +211,14 @@ export function VaultProvider({ children }: { children: ReactNode }) {
               credentials: "include",
             });
             if (syncRes.ok) {
-              current = await api<User>("/auth/me");
+              const data = await syncRes.json().catch(() => null);
+              try {
+                current = await api<User>("/auth/me");
+              } catch {
+                if (data?.user?.email) {
+                  current = { id: data.user.id || data.user.email, email: data.user.email };
+                }
+              }
             }
           } catch {
             // Google session not present
