@@ -1,0 +1,11 @@
+{
+  "name": "@proactive/shared",
+  "private": true,
+  "type": "module",
+  "main": "./src/schema.ts",
+  "types": "./src/schema.ts",
+  "exports": "./src/schema.ts",
+  "dependencies": {
+    "zod": "^4.3.0"
+  }
+}

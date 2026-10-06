@@ -1,0 +1,49 @@
+{
+  "name": "proactive",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit -p tsconfig.json && npm run typecheck -w @proactive/web",
+    "test": "vitest run tests/unit",
+    "test:integration": "vitest run tests/integration",
+    "test:e2e": "playwright test",
+    "build": "npm run build -w @proactive/api && npm run build -w @proactive/web",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "npm run dev -w @proactive/web",
+    "dev:api": "node apps/api/dist/apps/api/src/server.js",
+    "start:api": "npm run start -w @proactive/api",
+    "start:web": "npm run start -w @proactive/web",
+    "format": "prettier --write apps packages scripts tests *.ts *.mjs *.json *.md"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@playwright/test": "^1.58.0",
+    "@types/cookie-parser": "^1.4.9",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/supertest": "^6.0.3",
+    "@types/zxcvbn": "^4.4.5",
+    "eslint": "^9.39.0",
+    "supertest": "^7.2.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.55.0",
+    "vitest": "^3.2.4",
+    "prettier": "^3.8.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "pg": "^8.16.0"
+  },
+  "type": "module"
+}

@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noEmit": false,
+    "outDir": "dist",
+    "rootDir": "../.."
+  },
+  "include": ["index.ts", "src/**/*.ts", "../../packages/shared/src/**/*.ts"]
+}

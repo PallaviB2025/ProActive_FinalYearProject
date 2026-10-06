@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ProActive Vault</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#3b82f6" stroke-width="2">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">ProActive</span>
+          <span class="brand-badge">AES-256</span>
+        </div>
+      </div>
+      <div id="vault-status-badge" class="status-badge status-locked">Locked</div>
+    </header>
+
+    <!-- Message Bar -->
+    <div id="feedback-msg" class="feedback-msg hidden"></div>
+
+    <!-- VIEW 0: SIGN IN TO ACCOUNT (If not authenticated) -->
+    <section id="view-signin" class="view-section hidden">
+      <div class="locked-card">
+        <div class="lock-icon-wrapper">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#60a5fa" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <h3>Sign In to Account</h3>
+        <p class="section-desc">Sign in with your ProActive account email and password to connect the extension.</p>
+
+        <form id="signin-form">
+          <div class="input-group">
+            <label for="signin-email">Account Email</label>
+            <input type="email" id="signin-email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="input-group">
+            <label for="signin-password">Account Password</label>
+            <input type="password" id="signin-password" placeholder="••••••••••••" required autocomplete="current-password">
+          </div>
+          <button type="submit" id="signin-btn" class="btn btn-primary btn-full">
+            <span id="signin-spinner" class="spinner hidden"></span>
+            <span>Sign In to ProActive</span>
+          </button>
+        </form>
+
+        <div class="locked-footer">
+          <button type="button" id="sync-session-btn" class="text-link-btn">⚡ Sync session from open Web App</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 1: MASTER PASSWORD UNLOCK -->
+    <section id="view-locked" class="view-section hidden">
+      <div class="locked-card">
+        <div class="lock-icon-wrapper">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#60a5fa" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+        </div>
+        <h3>Vault is Locked</h3>
+        <p class="section-desc">Enter your Master Password to decrypt your credentials for this browser session.</p>
+
+        <form id="unlock-form">
+          <div class="input-group">
+            <label for="master-password">Master Password</label>
+            <input type="password" id="master-password" placeholder="••••••••••••" required autocomplete="current-password">
+          </div>
+          <button type="submit" id="unlock-btn" class="btn btn-primary btn-full">
+            <span id="unlock-spinner" class="spinner hidden"></span>
+            <span>Unlock Vault</span>
+          </button>
+        </form>
+
+        <div class="locked-footer">
+          <button type="button" id="switch-account-btn" class="text-link-btn">Switch Account</button>
+          <span class="text-muted"> • </span>
+          <a href="http://localhost:3000" target="_blank" class="text-link">Open Web App &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: UNLOCKED VAULT -->
+    <section id="view-unlocked" class="view-section hidden">
+      <!-- Domain Context -->
+      <div class="domain-banner">
+        <span class="text-muted">Current Tab:</span>
+        <strong id="current-domain" class="domain-name">Detecting…</strong>
+      </div>
+
+      <!-- Tab Matching Items -->
+      <div class="section-title">
+        <span>Matching Logins</span>
+        <span id="match-count" class="count-pill">0</span>
+      </div>
+
+      <div id="matching-list" class="credentials-list">
+        <div class="empty-state">No saved logins for this website.</div>
+      </div>
+
+      <!-- Footer Actions -->
+      <div class="unlocked-footer">
+        <button type="button" id="lock-btn" class="btn btn-secondary btn-sm">Lock Vault</button>
+        <a href="http://localhost:3000" target="_blank" class="btn btn-outline btn-sm">Full Dashboard</a>
+      </div>
+    </section>
+
+    <!-- Always-Available Quick Password Generator -->
+    <div class="generator-card">
+      <div class="generator-header">
+        <span class="gen-title">⚡ Instant Password Generator</span>
+        <button type="button" id="gen-btn" class="btn-icon" title="Generate another">↻</button>
+      </div>
+      <div class="gen-output-box">
+        <span id="gen-password" class="gen-pwd-text">Generating…</span>
+        <button type="button" id="copy-gen-btn" class="btn-copy">Copy</button>
+        <button type="button" id="fill-gen-btn" class="btn-copy btn-fill-direct" title="Autofill directly into active tab">⚡ Fill Page</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

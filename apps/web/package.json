@@ -1,0 +1,34 @@
+{
+  "name": "@proactive/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "next build --webpack",
+    "start": "next start -H 127.0.0.1 -p 3000",
+    "dev": "next dev -H 127.0.0.1 -p 3000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@proactive/shared": "*",
+    "@simplewebauthn/browser": "^14.0.0",
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "@types/zxcvbn": "^4.4.5",
+    "next": "^16.1.0",
+    "next-auth": "^5.0.0-beta.32",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.0",
+    "typescript": "^5.9.3",
+    "zod": "^4.3.0",
+    "zxcvbn": "^4.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,360 @@
+/* ProActive Extension Content Styles — Modern Natural Light Theme */
+
+.proactive-field-badge {
+  position: fixed !important;
+  width: 22px !important;
+  height: 22px !important;
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+  z-index: 2147483646 !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+}
+
+.proactive-field-badge:hover {
+  background: #eff6ff !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Autofill & Suggestion Dropdown (Natural Clean Light Theme) */
+.proactive-autofill-dropdown {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.12), 0 4px 10px -2px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.04) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  overflow: hidden !important;
+  color: #0f172a !important;
+  animation: proactive-pop-in 0.16s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes proactive-pop-in {
+  from {
+    transform: translateY(-4px) scale(0.98);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.proactive-dropdown-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 14px !important;
+  background: #f8fafc !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.proactive-brand-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #2563eb !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+
+.proactive-shield-mini svg {
+  vertical-align: middle !important;
+}
+
+.proactive-dropdown-close {
+  background: none !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  padding: 0 4px !important;
+  border-radius: 4px !important;
+  transition: all 0.15s ease !important;
+}
+
+.proactive-dropdown-close:hover {
+  color: #0f172a !important;
+  background: #e2e8f0 !important;
+}
+
+/* Suggestion Section */
+.proactive-suggest-section {
+  padding: 12px 14px !important;
+  background: #ffffff !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+.proactive-suggest-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  margin-bottom: 6px !important;
+}
+
+.proactive-suggest-display {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  margin-bottom: 6px !important;
+}
+
+.proactive-suggest-val {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  letter-spacing: 0.04em !important;
+  word-break: break-all !important;
+}
+
+.proactive-btn-regen {
+  background: #ffffff !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #2563eb !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  padding: 3px 8px !important;
+  cursor: pointer !important;
+  margin-left: 8px !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.15s ease !important;
+}
+
+.proactive-btn-regen:hover {
+  background: #eff6ff !important;
+  border-color: #2563eb !important;
+}
+
+.proactive-suggest-meta {
+  font-size: 10px !important;
+  color: #64748b !important;
+  margin-bottom: 10px !important;
+}
+
+.proactive-btn-use-suggest {
+  width: 100% !important;
+  padding: 9px 12px !important;
+  background: #2563eb !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25) !important;
+}
+
+.proactive-btn-use-suggest:hover {
+  background: #1d4ed8 !important;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Saved Matches Section */
+.proactive-match-divider {
+  padding: 8px 14px 4px !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #64748b !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  background: #f8fafc !important;
+}
+
+.proactive-items-list {
+  max-height: 220px !important;
+  overflow-y: auto !important;
+}
+
+.proactive-dropdown-item {
+  padding: 10px 14px !important;
+  cursor: pointer !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  transition: background 0.12s ease !important;
+}
+
+.proactive-dropdown-item:last-child {
+  border-bottom: none !important;
+}
+
+.proactive-dropdown-item:hover {
+  background: #f0f7ff !important;
+}
+
+.proactive-item-user {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  line-height: 1.3 !important;
+}
+
+.proactive-item-site {
+  font-size: 11px !important;
+  color: #64748b !important;
+  margin-top: 2px !important;
+}
+
+/* Save Prompt Banner (Natural Floating Dialog) */
+.proactive-save-prompt {
+  position: fixed !important;
+  top: 24px !important;
+  right: 24px !important;
+  width: 340px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 16px !important;
+  box-shadow: 0 20px 30px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.05) !important;
+  z-index: 2147483647 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  color: #0f172a !important;
+  animation: proactive-slide-in 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+@keyframes proactive-slide-in {
+  from { transform: translateY(-16px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.proactive-save-header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 10px !important;
+}
+
+.proactive-save-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #2563eb !important;
+}
+
+.proactive-close-btn {
+  background: none !important;
+  border: none !important;
+  color: #94a3b8 !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+}
+
+.proactive-close-btn:hover {
+  color: #0f172a !important;
+  background: #f1f5f9 !important;
+}
+
+.proactive-save-desc {
+  font-size: 12px !important;
+  line-height: 1.5 !important;
+  margin: 0 0 10px 0 !important;
+  color: #334155 !important;
+}
+
+.proactive-highlight {
+  color: #2563eb !important;
+  font-weight: 600 !important;
+}
+
+.proactive-save-meta {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+  font-size: 11px !important;
+  margin-bottom: 12px !important;
+  color: #64748b !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+.proactive-save-meta strong {
+  color: #0f172a !important;
+}
+
+.proactive-save-actions {
+  display: flex !important;
+  gap: 8px !important;
+}
+
+.proactive-btn {
+  flex: 1 !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  text-align: center !important;
+  border: none !important;
+  transition: all 0.15s ease !important;
+}
+
+.proactive-btn-primary {
+  background: #2563eb !important;
+  color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2) !important;
+}
+
+.proactive-btn-primary:hover {
+  background: #1d4ed8 !important;
+}
+
+.proactive-btn-secondary {
+  background: #f1f5f9 !important;
+  color: #475569 !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.proactive-btn-secondary:hover {
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+.proactive-save-success {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #059669 !important;
+  text-align: center !important;
+  padding: 8px 0 !important;
+}
+
+/* Toast Notice */
+.proactive-toast-notice {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  color: #0f172a !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 10px 16px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.04) !important;
+  z-index: 2147483647 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  animation: proactive-slide-in 0.2s ease !important;
+}

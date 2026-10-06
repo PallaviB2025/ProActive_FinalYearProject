@@ -1,0 +1,8 @@
+node_modules
+.runtime
+**/dist
+**/.next
+test-results
+playwright-report
+package-lock.json
+**/next-env.d.ts

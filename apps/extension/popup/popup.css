@@ -1,0 +1,92 @@
+/* ProActive Extension Popup Styles — Modern Natural Light Theme */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  width: 360px;
+  min-height: 480px;
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  user-select: none;
+}
+.popup-container { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+/* Header */
+.popup-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 12px; border-bottom: 1px solid #e2e8f0; }
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand-icon { width: 32px; height: 32px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
+.brand-name { font-size: 14px; font-weight: 700; color: #0f172a; }
+.brand-badge { font-size: 10px; font-family: ui-monospace, SFMono-Regular, monospace; background: #eff6ff; color: #2563eb; border: 1px solid #dbeafe; padding: 1px 5px; border-radius: 4px; margin-left: 4px; font-weight: 600; }
+.status-badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+.status-locked { background: #fef2f2; color: #dc2626; border: 1px solid #fecaca; }
+.status-unlocked { background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; }
+
+/* Message Bar */
+.feedback-msg { padding: 9px 12px; border-radius: 8px; font-size: 12px; background: #ffffff; border: 1px solid #e2e8f0; color: #0f172a; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04); }
+.feedback-msg.error { background: #fef2f2; border-color: #fecaca; color: #dc2626; }
+
+/* Locked Card / Sign In Card */
+.locked-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px 16px; text-align: center; box-shadow: 0 2px 4px rgba(15, 23, 42, 0.03); }
+.lock-icon-wrapper { width: 48px; height: 48px; margin: 0 auto 12px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.locked-card h3 { font-size: 15px; font-weight: 700; color: #0f172a; margin-bottom: 6px; }
+.section-desc { font-size: 12px; color: #64748b; margin-bottom: 16px; line-height: 1.45; }
+
+.input-group { text-align: left; margin-bottom: 12px; }
+.input-group label { display: block; font-size: 11px; font-weight: 600; color: #334155; margin-bottom: 5px; }
+input[type="password"], input[type="email"] { width: 100%; padding: 9px 12px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; color: #0f172a; font-size: 13px; outline: none; transition: all 0.15s ease; }
+input[type="password"]:focus, input[type="email"]:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+
+/* Buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; border: none; text-decoration: none; transition: all 0.15s ease; }
+.btn-full { width: 100%; }
+.btn-sm { padding: 6px 12px; font-size: 11px; }
+.btn-primary { background: #2563eb; color: #ffffff; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2); }
+.btn-primary:hover { background: #1d4ed8; }
+.btn-secondary { background: #ffffff; color: #334155; border: 1px solid #cbd5e1; }
+.btn-secondary:hover { background: #f1f5f9; color: #0f172a; }
+.btn-outline { background: #ffffff; border: 1px solid #cbd5e1; color: #2563eb; }
+.btn-outline:hover { background: #eff6ff; border-color: #2563eb; }
+.locked-footer { margin-top: 14px; font-size: 11px; }
+.text-link { color: #2563eb; text-decoration: none; font-size: 11px; font-weight: 500; }
+.text-link:hover { text-decoration: underline; }
+.text-link-btn { background: none; border: none; color: #2563eb; cursor: pointer; font-size: 11px; font-weight: 500; text-decoration: underline; padding: 0; }
+.text-link-btn:hover { color: #1d4ed8; }
+.text-muted { color: #94a3b8; }
+
+/* Unlocked View */
+.domain-banner { background: #ffffff; border: 1px solid #e2e8f0; padding: 9px 12px; border-radius: 8px; display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.domain-name { color: #2563eb; font-family: ui-monospace, SFMono-Regular, monospace; }
+.section-title { display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
+.count-pill { background: #e2e8f0; color: #334155; padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+
+.credentials-list { display: flex; flex-direction: column; gap: 8px; max-height: 170px; overflow-y: auto; }
+.cred-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 10px 12px; display: flex; align-items: center; justify-content: space-between; transition: border-color 0.15s ease; }
+.cred-card:hover { border-color: #cbd5e1; }
+.cred-info { display: flex; flex-direction: column; gap: 2px; overflow: hidden; max-width: 170px; }
+.cred-username { font-weight: 600; color: #0f172a; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cred-site { font-size: 10px; color: #64748b; }
+.cred-actions { display: flex; align-items: center; gap: 4px; }
+.btn-action { background: #f1f5f9; border: 1px solid #e2e8f0; color: #475569; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.15s ease; }
+.btn-action:hover { background: #e2e8f0; color: #0f172a; }
+.btn-fill { background: #eff6ff; border: 1px solid #bfdbfe; color: #2563eb; }
+.btn-fill:hover { background: #2563eb; color: #ffffff; }
+.empty-state { text-align: center; padding: 18px 10px; color: #94a3b8; font-size: 12px; background: #ffffff; border: 1px dashed #cbd5e1; border-radius: 8px; }
+
+/* Quick Password Generator Card */
+.generator-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 12px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03); }
+.generator-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.gen-title { font-size: 11px; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.03em; }
+.btn-icon { background: none; border: none; color: #2563eb; font-size: 15px; cursor: pointer; padding: 2px 5px; border-radius: 4px; }
+.btn-icon:hover { background: #eff6ff; }
+.gen-output-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 7px 10px; display: flex; align-items: center; gap: 6px; }
+.gen-pwd-text { font-family: ui-monospace, SFMono-Regular, monospace; font-size: 12px; font-weight: 600; color: #0f172a; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
+.btn-copy { background: #ffffff; border: 1px solid #cbd5e1; color: #334155; font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px; cursor: pointer; transition: all 0.15s ease; }
+.btn-copy:hover { background: #f1f5f9; color: #0f172a; }
+.btn-fill-direct { background: #eff6ff; border-color: #bfdbfe; color: #2563eb; }
+.btn-fill-direct:hover { background: #2563eb; color: #ffffff; border-color: #2563eb; }
+
+.unlocked-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 8px; border-top: 1px solid #e2e8f0; }
+.hidden { display: none !important; }
+.spinner { width: 14px; height: 14px; border: 2px solid rgba(255, 255, 255, 0.3); border-top-color: #ffffff; border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
