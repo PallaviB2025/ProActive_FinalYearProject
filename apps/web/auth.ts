@@ -36,6 +36,15 @@ export const config: NextAuthConfig = {
       if (isProtected) return isLoggedIn;
       return true;
     },
+    async redirect({ url, baseUrl }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      try {
+        if (new URL(url).origin === baseUrl) return url;
+      } catch {
+        // invalid URL fallback
+      }
+      return baseUrl;
+    },
     session({ session, token }) {
       if (token?.sub && session.user) {
         session.user.id = token.sub;

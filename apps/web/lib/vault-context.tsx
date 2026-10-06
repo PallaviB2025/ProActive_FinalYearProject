@@ -200,12 +200,30 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     let active = true;
     const init = async () => {
       try {
-        const current = await api<User>("/auth/me");
+        let current: User | null = null;
+        try {
+          current = await api<User>("/auth/me");
+        } catch {
+          // If Express session is not yet set, check if a NextAuth Google session exists
+          try {
+            const syncRes = await fetch("/api/auth/google-session", {
+              headers: { Accept: "application/json" },
+              credentials: "include",
+            });
+            if (syncRes.ok) {
+              current = await api<User>("/auth/me");
+            }
+          } catch {
+            // Google session not present
+          }
+        }
         if (!active) return;
-        setUser(current);
-        const vault = await api<{ metadata: VaultMetadata | null }>("/vault");
-        if (!active) return;
-        setMetadata(vault.metadata);
+        if (current) {
+          setUser(current);
+          const vault = await api<{ metadata: VaultMetadata | null }>("/vault");
+          if (!active) return;
+          setMetadata(vault.metadata);
+        }
       } catch {
         // Not authenticated or network error
       } finally {

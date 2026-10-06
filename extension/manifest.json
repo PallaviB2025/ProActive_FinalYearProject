@@ -36,6 +36,8 @@
     "cookies"
   ],
   "host_permissions": [
+    "https://pro-active-final-year-project.vercel.app/*",
+    "https://proactive-api-pallavib2025.vercel.app/*",
     "http://127.0.0.1:4000/*",
     "http://localhost:3000/*",
     "https://*/*",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { signInWithGoogle } from "../actions";
+import { signIn } from "next-auth/react";
 import { useVault } from "../../lib/vault-context";
 
 export function AuthCard() {
@@ -171,7 +171,7 @@ export function AuthCard() {
             {/* Google Sign-In */}
             <button
               type="button"
-              onClick={() => signInWithGoogle()}
+              onClick={() => signIn("google", { redirectTo: "/" })}
               className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-slate-300 text-slate-700 text-xs font-semibold shadow-sm hover:shadow transition-all cursor-pointer"
             >
               {/* Official Google "G" logo */}

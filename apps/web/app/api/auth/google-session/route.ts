@@ -5,7 +5,10 @@ export const runtime = "nodejs";
 
 export async function GET(req: NextRequest) {
   const session = await auth();
-  const redirectHome = NextResponse.redirect(new URL("/", req.url));
+  const wantsJson = req.headers.get("accept")?.includes("application/json");
+  const redirectHome = wantsJson
+    ? NextResponse.json({ authenticated: false }, { status: 401 })
+    : NextResponse.redirect(new URL("/", req.url));
 
   if (!session?.user?.email) {
     return redirectHome;
@@ -29,15 +32,30 @@ export async function GET(req: NextRequest) {
     }
 
     const data = (await resp.json()) as { token: string };
-    const response = NextResponse.redirect(new URL("/", req.url));
+    const response = wantsJson
+      ? NextResponse.json({ authenticated: true, user: session.user })
+      : NextResponse.redirect(new URL("/", req.url));
+
+    const isProduction = process.env.NODE_ENV === "production";
 
     // Set the proactive_session cookie so vault-context /auth/me works
     response.cookies.set("proactive_session", data.token, {
       httpOnly: true,
       maxAge: 8 * 60 * 60, // 8 hours
       path: "/",
-      sameSite: "strict",
+      sameSite: "lax",
+      secure: isProduction,
     });
+
+    if (isProduction) {
+      response.cookies.set("__Host-proactive_session", data.token, {
+        httpOnly: true,
+        maxAge: 8 * 60 * 60, // 8 hours
+        path: "/",
+        sameSite: "lax",
+        secure: true,
+      });
+    }
 
     return response;
   } catch (err) {

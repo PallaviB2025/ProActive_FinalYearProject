@@ -156,6 +156,7 @@ signinForm.addEventListener("submit", async (e) => {
 syncSessionBtn.addEventListener("click", async () => {
   try {
     const urls = [
+      "https://pro-active-final-year-project.vercel.app",
       "http://localhost:3000",
       "http://127.0.0.1:3000",
       "http://127.0.0.1:4000",

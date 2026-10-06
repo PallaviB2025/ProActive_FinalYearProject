@@ -8,7 +8,7 @@ import {
 let vaultKey = null;
 let decryptedVault = [];
 let vaultMetadata = null;
-let apiBaseUrl = "http://127.0.0.1:4000";
+let apiBaseUrl = "https://proactive-api-pallavib2025.vercel.app";
 let sessionToken = null;
 
 // Initialize settings and session from local storage
@@ -44,7 +44,13 @@ chrome.runtime.onInstalled.addListener(async () => {
 async function syncSessionCookies() {
   if (!chrome.cookies) return false;
   try {
-    const urls = ["http://localhost:3000", "http://127.0.0.1:3000", "http://127.0.0.1:4000", "http://localhost:4000"];
+    const urls = [
+      "https://pro-active-final-year-project.vercel.app",
+      "http://localhost:3000",
+      "http://127.0.0.1:3000",
+      "http://127.0.0.1:4000",
+      "http://localhost:4000",
+    ];
     let candidateToken = null;
     for (const u of urls) {
       const c = await chrome.cookies.get({ url: u, name: "proactive_session" }).catch(() => null);
