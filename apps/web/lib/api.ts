@@ -15,7 +15,7 @@ export async function api<T>(
     process.env.NEXT_PUBLIC_API_BASE_URL ??
     (typeof window !== "undefined"
       ? "/api"
-      : "http://127.0.0.1:4000");
+      : process.env.API_ORIGIN ?? "http://127.0.0.1:4000");
   const headers: Record<string, string> = {};
   if (method !== "GET" && method !== "HEAD") {
     headers["X-Proactive-CSRF"] = "1";
