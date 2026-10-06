@@ -1,6 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { auth } from "../../../../auth";
-import { createHash } from "node:crypto";
 
 export const runtime = "nodejs";
 
@@ -16,13 +15,12 @@ export async function GET(req: NextRequest) {
   }
 
   const email = session.user.email.toLowerCase().trim();
-  let token: string | null = null;
-  let syncError: string | null = null;
 
   try {
-    const apiUrl = process.env.API_ORIGIN ?? "http://127.0.0.1:4000";
+    const apiUrl = process.env.API_ORIGIN ?? "https://proactive-api-pallavib2025.vercel.app";
     console.log(`[google-session] Syncing user ${email} with backend at: ${apiUrl}`);
 
+    // Call real Express backend /auth/google-sync
     const resp = await fetch(`${apiUrl}/auth/google-sync`, {
       method: "POST",
       headers: {
@@ -32,59 +30,79 @@ export async function GET(req: NextRequest) {
       body: JSON.stringify({ email }),
     });
 
-    if (resp.ok) {
-      const data = (await resp.json()) as { token: string };
-      token = data.token;
-      console.log(`[google-session] Backend sync successful for ${email}`);
-    } else {
+    if (!resp.ok) {
       const errText = await resp.text().catch(() => "");
-      syncError = `Backend returned ${resp.status}: ${errText}`;
-      console.error(`[google-session] Backend sync error:`, syncError);
+      console.error(`[google-session] Backend sync error: ${resp.status} - ${errText}`);
+      return wantsJson
+        ? NextResponse.json({ authenticated: false, error: `Backend sync error: ${resp.status}` }, { status: 401 })
+        : NextResponse.redirect(new URL("/", req.url));
     }
-  } catch (err: unknown) {
-    syncError = err instanceof Error ? err.message : String(err);
-    console.error(`[google-session] Backend fetch network error:`, syncError);
-  }
 
-  // Force-set fallback token so the user is NEVER kicked back to the login loop
-  if (!token) {
-    console.warn(`[google-session] Applying resilient fallback session for ${email} (reason: ${syncError})`);
-    token = createHash("sha256").update(`oauth_fallback:${email}:${Date.now()}`).digest("hex");
-  }
+    const data = (await resp.json()) as { id: string; email: string; token: string };
 
-  const response = wantsJson
-    ? NextResponse.json({
-        authenticated: true,
-        user: {
-          id: session.user.id || email,
-          email,
-          name: session.user.name ?? email.split("@")[0],
+    // Query vault status to check if user already has an active vault
+    let hasVault = false;
+    let metadata = null;
+    try {
+      const vaultResp = await fetch(`${apiUrl}/vault`, {
+        headers: {
+          Authorization: `Bearer ${data.token}`,
+          "X-Proactive-Session": data.token,
         },
-        fallback: !syncError ? false : true,
-        diagnostics: syncError ?? "synced",
-      })
-    : NextResponse.redirect(new URL("/", req.url));
+      });
+      if (vaultResp.ok) {
+        const vData = (await vaultResp.json()) as { metadata: unknown };
+        if (vData?.metadata) {
+          hasVault = true;
+          metadata = vData.metadata;
+        }
+      }
+    } catch (vErr) {
+      console.warn("[google-session] Vault check warning:", vErr);
+    }
 
-  const isProduction = process.env.NODE_ENV === "production";
+    const response = wantsJson
+      ? NextResponse.json({
+          authenticated: true,
+          verified: true,
+          token: data.token,
+          hasVault,
+          metadata,
+          user: {
+            id: data.id,
+            email: data.email,
+            name: session.user.name ?? data.email.split("@")[0],
+          },
+        })
+      : NextResponse.redirect(new URL("/", req.url));
 
-  // Set the proactive_session cookies for both direct domain and host-prefixed scopes
-  response.cookies.set("proactive_session", token, {
-    httpOnly: true,
-    maxAge: 8 * 60 * 60,
-    path: "/",
-    sameSite: "lax",
-    secure: isProduction,
-  });
+    const isProduction = process.env.NODE_ENV === "production" || !!process.env.VERCEL;
 
-  if (isProduction) {
-    response.cookies.set("__Host-proactive_session", token, {
+    // Set real verified database session cookie
+    response.cookies.set("proactive_session", data.token, {
       httpOnly: true,
       maxAge: 8 * 60 * 60,
       path: "/",
       sameSite: "lax",
-      secure: true,
+      secure: isProduction,
     });
-  }
 
-  return response;
+    if (isProduction) {
+      response.cookies.set("__Host-proactive_session", data.token, {
+        httpOnly: true,
+        maxAge: 8 * 60 * 60,
+        path: "/",
+        sameSite: "lax",
+        secure: true,
+      });
+    }
+
+    return response;
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error(`[google-session] Fatal sync error:`, message);
+    return wantsJson
+      ? NextResponse.json({ authenticated: false, error: message }, { status: 500 })
+      : NextResponse.redirect(new URL("/", req.url));
+  }
 }

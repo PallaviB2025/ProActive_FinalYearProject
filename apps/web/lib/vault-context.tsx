@@ -201,6 +201,7 @@ export function VaultProvider({ children }: { children: ReactNode }) {
     const init = async () => {
       try {
         let current: User | null = null;
+        let isVerifiedOAuth = false;
         try {
           current = await api<User>("/auth/me");
         } catch {
@@ -212,6 +213,9 @@ export function VaultProvider({ children }: { children: ReactNode }) {
             });
             if (syncRes.ok) {
               const data = await syncRes.json().catch(() => null);
+              if (data?.verified) {
+                isVerifiedOAuth = true;
+              }
               try {
                 current = await api<User>("/auth/me");
               } catch {
@@ -227,9 +231,15 @@ export function VaultProvider({ children }: { children: ReactNode }) {
         if (!active) return;
         if (current) {
           setUser(current);
-          const vault = await api<{ metadata: VaultMetadata | null }>("/vault");
-          if (!active) return;
-          setMetadata(vault.metadata);
+          try {
+            const vault = await api<{ metadata: VaultMetadata | null }>("/vault");
+            if (active) setMetadata(vault.metadata);
+          } catch {
+            // Vault not yet created
+          }
+          if (isVerifiedOAuth) {
+            setUnlocked(true);
+          }
         }
       } catch {
         // Not authenticated or network error
